@@ -1,0 +1,128 @@
+/* Tailwind base setup */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===========================
+   ARAKU HOUSE LIGHT BROWN THEME
+   (Like your screenshot)
+=========================== */
+:root {
+  --araku-dark: #f5eee8;      /* Page background – light cream */
+  --araku-card: #fdf7f0;      /* Panel background */
+  --araku-cream: #3b2518;     /* Main text – dark coffee brown */
+  --araku-highlight: #d26a3a; /* Accent orange/brown line & price */
+  --araku-accent: #e9ded1;    /* Hero/section cream */
+  --araku-border: rgba(142, 110, 82, 0.25);
+  --araku-muted: #7f6a5a;     /* Paragraph text */
+  --araku-chip: #fffaf4;
+}
+
+/* Reset & global */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--araku-dark);
+  color: var(--araku-cream);
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+/* ===========================
+   UTILITIES
+=========================== */
+.bg-araku-dark {
+  background-color: var(--araku-dark); /* page bg */
+}
+
+.bg-araku-card {
+  background-color: var(--araku-card); /* big panel bg */
+}
+
+.bg-araku-chip {
+  background-color: var(--araku-chip);
+  color: #3b2518;
+}
+
+.text-araku-cream {
+  color: var(--araku-cream); /* main text */
+}
+
+.text-araku-muted {
+  color: var(--araku-muted); /* description text */
+}
+
+.text-araku-highlight {
+  color: var(--araku-highlight); /* price color */
+}
+
+.border-araku-border {
+  border-color: var(--araku-border);
+}
+
+/* Soft section gradient (hero top area) */
+.from-araku-accent {
+  --tw-gradient-from: var(--araku-accent);
+  --tw-gradient-to: rgba(233, 222, 209, 0);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.via-araku-highlight {
+  --tw-gradient-to: rgba(210, 106, 58, 0);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--araku-highlight),
+    var(--tw-gradient-to);
+}
+
+.to-araku-accent {
+  --tw-gradient-to: var(--araku-accent);
+}
+
+/* ===========================
+   MENU TAB STYLE (if you use tabs)
+=========================== */
+.menu-tab {
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  background-color: #f3e5d7;
+  color: var(--araku-muted);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.45rem 1rem;
+  font-size: 0.73rem;
+  transition: 0.25s all ease;
+}
+
+.menu-tab:hover {
+  background-color: #f0ddcb;
+  color: var(--araku-cream);
+}
+
+.menu-tab-active {
+  background-color: #ffffff;
+  color: var(--araku-cream);
+  border-color: var(--araku-highlight);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.1);
+}
+
+/* ===========================
+   MENU CARD (like screenshot)
+=========================== */
+.menu-card {
+  border-radius: 0.8rem;
+  border: 1px solid rgba(208, 188, 163, 0.8);
+  background: #ffffff;
+  padding: 1.1rem 1.25rem;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.04);
+  transition: 0.22s all ease;
+}
+
+.menu-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
+  border-color: var(--araku-highlight);
+}
