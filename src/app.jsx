@@ -205,19 +205,17 @@ const App = () => {
         <header className="bg-araku-accent px-6 py-5 md:px-10 md:py-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>
             <p className="text-lg md:text-2xl font-bold tracking-wide text-araku-cream">
-  Araku House
-              <a
-                href="https://ruahverse.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-1 inline-block text-[11px] md:text-xs text-slate-400 hover:text-araku-accent transition-colors duration-150"
-                aria-label="As designed by Ruah Verse (opens in a new tab)"
-              >
-                <span className="font-medium">
-                  As designed by
-                  <span className="uppercase tracking-wider ml-2">Ruah Verse</span>
-                </span>
-              </a>
+              Araku House
+            </p>
+            <h1 className="text-2xl md:text-4xl font-bold text-araku-cream text-left w-full">Our Menu</h1>
+            <p className="text-xs md:text-sm text-slate-900/80 mt-1 max-w-xl">
+              All our dishes are freshly prepared after you order. Please allow
+              a minimum of 20 minutes for service so you can enjoy your food hot
+              and at its best.
+            </p>
+          </div>
+
+          <div className="flex flex-col items-start md:items-end gap-1">
             <span className="inline-flex items-center rounded-full bg-araku-chip px-3 py-1 text-[11px] md:text-xs font-medium uppercase tracking-wide">
               Dine-in • Takeaway
             </span>
