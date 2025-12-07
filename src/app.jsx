@@ -297,9 +297,11 @@ const App = () => {
               </p>
 
               <a
-                href="#"
+                href="https://ruahverse.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="mt-1 inline-block text-[11px] md:text-xs text-slate-400 hover:text-araku-accent transition-colors duration-150"
-                aria-label="Designed by Ruah Verse"
+                aria-label="Designed by Ruah Verse (opens in a new tab)"
               >
                 <span className="sr-only">Designed by </span>
                 <span className="uppercase tracking-wider font-medium">Ruah Verse</span>
