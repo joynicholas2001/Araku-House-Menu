@@ -286,24 +286,26 @@ const App = () => {
 
           {/* Footer note */}
           <div className="mt-6 md:mt-8 border-t border-araku-border pt-4 flex flex-col md:flex-row md:items-center md:justify-between gap-2 text-[11px] md:text-xs text-araku-muted">
-  <p>
-    All prices are inclusive of taxes. Menu items and prices are subject to change.
-    <br />
-    Special dietary requirements? Let us know and we&apos;ll do our best to accommodate you.
-  </p>
+            <p>
+              All prices are inclusive of taxes. Menu items and prices are subject to change.
+            </p>
 
-  <div className="flex flex-col md:items-end text-right">
-    <p>Araku House • Café &amp; Organic Store, Vijayawada</p>
-    <a
-      href="https://ruahverse.com"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="text-araku-highlight hover:underline font-medium mt-1"
-    >
-      Designed by Ruah Verse
-    </a>
-  </div>
-</div>
+            <div className="flex flex-col md:items-end text-right">
+              <p>
+                <span className="font-extrabold text-araku-accent">Araku House</span>
+                <span className="ml-2 text-araku-muted">• Café &amp; Organic Store, Vijayawada</span>
+              </p>
+
+              <a
+                href="#"
+                className="mt-1 inline-block text-[11px] md:text-xs text-slate-400 hover:text-araku-accent transition-colors duration-150"
+                aria-label="Designed by Ruah Verse"
+              >
+                <span className="sr-only">Designed by </span>
+                <span className="uppercase tracking-wider font-medium">Ruah Verse</span>
+              </a>
+            </div>
+          </div>
 
         </main>
       </div>
