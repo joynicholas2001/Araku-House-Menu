@@ -304,7 +304,7 @@ const App = () => {
                 aria-label="Designed by Ruah Verse (opens in a new tab)"
               >
                 <span className="sr-only">Designed by Ruah Verse </span>
-                <span className="uppercase tracking-wider font-medium">Designed byRuah Verse</span>
+                <span className="uppercase tracking-wider font-medium">Designed by Ruah Verse</span>
               </a>
             </div>
           </div>
