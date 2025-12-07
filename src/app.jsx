@@ -191,6 +191,47 @@ const App = () => {
   const [activeCategory, setActiveCategory] = useState(categories[0]);
   const activeData =
     MENU.find((c) => c.category === activeCategory) || MENU[0];
+  const [order, setOrder] = useState({});
+
+  const parsePrice = (priceStr) => {
+    // turn strings like "₹1,200" into number 1200
+    if (!priceStr) return 0;
+    const n = Number(String(priceStr).replace(/[^0-9.-]+/g, ""));
+    return Number.isFinite(n) ? n : 0;
+  };
+
+  const formatPrice = (n) => `₹${n.toFixed(0)}`;
+
+  const addItem = (item) => {
+    setOrder((prev) => {
+      const key = item.name;
+      const prevQty = prev[key]?.qty || 0;
+      const priceNum = parsePrice(item.price);
+      return {
+        ...prev,
+        [key]: { name: item.name, price: priceNum, qty: prevQty + 1 },
+      };
+    });
+  };
+
+  const removeItem = (item) => {
+    setOrder((prev) => {
+      const key = item.name;
+      const entry = prev[key];
+      if (!entry) return prev;
+      if (entry.qty <= 1) {
+        const copy = { ...prev };
+        delete copy[key];
+        return copy;
+      }
+      return { ...prev, [key]: { ...entry, qty: entry.qty - 1 } };
+    });
+  };
+
+  const clearOrder = () => setOrder({});
+
+  const orderItems = Object.values(order);
+  const orderTotal = orderItems.reduce((s, it) => s + it.price * it.qty, 0);
 
   return (
     <div className="min-h-screen bg-araku-dark text-araku-cream flex items-center justify-center px-4 py-10">
@@ -253,9 +294,10 @@ const App = () => {
             </span>
           </div>
 
-          <div className="space-y-6 md:space-y-8">
-            {activeData.sections.map((section) => (
-              <section key={section.title} className="space-y-3 md:space-y-4">
+          <div className="md:flex md:gap-6">
+            <div className="flex-1 space-y-6 md:space-y-8">
+              {activeData.sections.map((section) => (
+                <section key={section.title} className="space-y-3 md:space-y-4">
                 <div className="flex items-center justify-between gap-2">
                   <h3 className="text-sm md:text-base font-semibold tracking-[0.18em] uppercase text-araku-muted">
                     {section.title}
@@ -273,15 +315,79 @@ const App = () => {
                         <h4 className="text-sm md:text-base font-semibold text-araku-cream group-hover:text-araku-highlight transition-colors duration-200">
                           {item.name}
                         </h4>
-                        <span className="text-sm md:text-base font-semibold text-araku-highlight whitespace-nowrap">
-                          {item.price}
-                        </span>
+                        <div className="flex items-center gap-3">
+                          <span className="text-sm md:text-base font-semibold text-araku-highlight whitespace-nowrap">{item.price}</span>
+                          {/* quantity controls */}
+                          <div className="flex items-center gap-2">
+                            {order[item.name]?.qty ? (
+                              <>
+                                <button
+                                  onClick={() => removeItem(item)}
+                                  className="px-2 py-1 rounded-md bg-araku-border text-sm text-araku-cream hover:bg-araku-accent"
+                                  aria-label={`Decrease ${item.name}`}
+                                >
+                                  -
+                                </button>
+                                <span className="text-sm w-6 text-center">{order[item.name].qty}</span>
+                                <button
+                                  onClick={() => addItem(item)}
+                                  className="px-2 py-1 rounded-md bg-araku-highlight text-sm text-araku-card hover:brightness-110"
+                                  aria-label={`Increase ${item.name}`}
+                                >
+                                  +
+                                </button>
+                              </>
+                            ) : (
+                              <button
+                                onClick={() => addItem(item)}
+                                className="text-xs px-3 py-1 rounded-md bg-araku-chip text-araku-cream hover:opacity-90"
+                              >
+                                Add
+                              </button>
+                            )}
+                          </div>
+                        </div>
                       </div>
                     </article>
                   ))}
                 </div>
-              </section>
-            ))}
+                </section>
+              ))}
+            </div>
+
+            {/* Order panel */}
+            <aside className="w-full md:w-80 mt-6 md:mt-0 bg-araku-card border border-araku-border p-4 rounded-lg">
+              <h3 className="text-sm font-semibold text-araku-cream mb-3">Your Order</h3>
+              {orderItems.length === 0 ? (
+                <p className="text-xs text-araku-muted">No items yet. Add items to preview your order.</p>
+              ) : (
+                <div className="space-y-3">
+                  {orderItems.map((it) => (
+                    <div key={it.name} className="flex items-center justify-between gap-3">
+                      <div>
+                        <div className="text-sm font-medium text-araku-cream">{it.name}</div>
+                        <div className="text-xs text-araku-muted">{formatPrice(it.price)} × {it.qty} = <span className="text-araku-highlight font-semibold">{formatPrice(it.price * it.qty)}</span></div>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <button onClick={() => removeItem({ name: it.name })} className="px-2 py-1 rounded-md bg-araku-border text-sm text-araku-cream">-</button>
+                        <div className="w-6 text-center">{it.qty}</div>
+                        <button onClick={() => addItem({ name: it.name, price: formatPrice(it.price) })} className="px-2 py-1 rounded-md bg-araku-highlight text-sm text-araku-card">+</button>
+                      </div>
+                    </div>
+                  ))}
+
+                  <div className="border-t border-araku-border pt-3 flex items-center justify-between">
+                    <div className="text-sm text-araku-muted">Total</div>
+                    <div className="text-lg font-bold text-araku-highlight">{formatPrice(orderTotal)}</div>
+                  </div>
+
+                  <div className="flex gap-2 mt-3">
+                    <button onClick={() => clearOrder()} className="flex-1 px-3 py-2 rounded-md bg-araku-border text-sm text-araku-cream">Clear</button>
+                    <button className="flex-1 px-3 py-2 rounded-md bg-araku-highlight text-sm text-araku-card">Checkout</button>
+                  </div>
+                </div>
+              )}
+            </aside>
           </div>
 
           {/* Footer note */}
