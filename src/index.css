@@ -126,3 +126,35 @@ body {
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
   border-color: var(--araku-highlight);
 }
+
+/* ===========================
+   BUTTON STYLES
+   Primary: dark-brown filled button
+   Secondary: light-beige pill with brown text (for Clear)
+=========================== */
+.btn-primary {
+  background-color: var(--araku-cream);
+  color: var(--araku-card);
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.6rem;
+  font-weight: 600;
+  text-align: center;
+  box-shadow: 0 6px 18px rgba(59,37,24,0.12);
+}
+.btn-primary:hover {
+  filter: brightness(0.95);
+}
+
+.btn-secondary {
+  background-color: var(--araku-chip);
+  color: var(--araku-cream);
+  padding: 0.45rem 0.75rem;
+  border-radius: 9999px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  border: 1px solid rgba(59,37,24,0.06);
+}
+.btn-secondary:hover {
+  background-color: #fff6ee;
+}
